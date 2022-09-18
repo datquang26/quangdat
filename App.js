@@ -13,7 +13,7 @@ const UselessTextInput = () => {
         style={styles.input}
         onChangeText={onChangeText}
         value={text}
-        placeholder="abcd"
+        placeholder="Email"
         keyboardType="numeric"
         
       />
