@@ -1,98 +1,68 @@
-import React from "react";
-import { SafeAreaView, StyleSheet, TextInput, View, Button, Text } from "react-native";
-
-const UselessTextInput = () => {
-  const [text, onChangeText] = React.useState(null);
-  const [number, onChangeNumber] = React.useState(null);
-
+import * as React from "react";
+import { Button, View, Text, TextInput, StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Buttonn } from "./Components/Buttonn";
+function HomeScreen({ navigation }) {
   return (
-    <View style={styles.main}>
-    <View style={styles.text}>
-    <SafeAreaView>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeText}
-        value={text}
-        placeholder="abc"
-        keyboardType="numeric"
-        
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        placeholder="Password"
-        keyboardType="numeric"
-      />
-      <View style={styles.button}>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Hello</Text>
       <Button
-        title="Login"
-        color="#00b6ed"
-        onPress={() => Alert.alert('Button with adjusted color pressed')}
+        title="Click-1"
+        onPress={() => navigation.navigate("Register")}
+        color="red"
       />
-      </View>
-
-      <View style={styles.text1}>
-        <Text >Forgot your password?</Text>
-      </View>
-
-      <View style={styles.text2}>
-        <Text >Register</Text>
-      </View>
-     
-    </SafeAreaView>
-    </View>
-
+      <Button
+        title="Click-2"
+        onPress={() => navigation.navigate("ForgotPassword")}
+        color="black"
+      />
     </View>
   );
-};
+}
+function Register() {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <TextInput placeholder="Email" style={styles.input} />
+      <TextInput placeholder="PassWord" style={styles.input} />
+      <Buttonn>Login</Buttonn>
+    </View>
+  );
+}
+function ForgotPassword() {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <TextInput placeholder="Email" style={styles.input} />
+      <Buttonn>Nhập</Buttonn>
+    </View>
+  );
+}
+const Stack = createNativeStackNavigator();
 
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 const styles = StyleSheet.create({
-  main:{
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#ddd',
-  },
-
-  text:{
-    marginTop:300,
-    width:'100%',
-    height:300,
-    display: "flex",
-    justifyContent: "center",
-  },
-
   input: {
-    height: 50,
+    height: 40,
+    width: "70%",
     margin: 12,
-    width:250,
-    padding: 10,
-    borderRadius:40,
-    marginLeft:90,
-    backgroundColor: 'white',
-    paddingLeft:50,
+    borderWidth: 0,
+    paddingLeft: 50,
+    borderRadius: 80,
+    backgroundColor: "white",
   },
-  
-  button:{
-    backgroundColor:'#00b6ed',
-    width:"60%",
-    marginLeft:90,
+  btn: {
+    width: "70%",
   },
-
-  text1:{
-    marginTop: 40,
-    marginLeft: 150,
-    width:'100%',
-    height: 20,
-  },
-
-  text2:{
-    marginTop: 40,
-    marginLeft: 190,
-    width:'100%',
-    height: 20,
-  },
-
 });
 
-export default UselessTextInput;
+export default App;
